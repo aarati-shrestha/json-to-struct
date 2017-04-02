@@ -1,13 +1,23 @@
 $(document).ready(function(){
   var go =""
+
+  //KeyMap is used as map instead of array for future use.
   var keyMap = new Map();
   var tab = 0
   var data ='{"Header": "headerdata", "body":{"body1": "body1data", "body2": {"la": {"fa":"tuku"}}}, "tail":{"tick": "tock"}}'
   $("#convertData").click(function(){
       convertToStruct("",JSON.parse(data));
       var mapIter = keyMap.values();
-      for (var i=0 ; i<keyMap.size; i++){
-        appendString(mapIter.next().value)
+      //var mapData = new Map();
+      finalData =[]
+      for (var i=0;i<keyMap.size; i++){
+      //  appendString(mapIter.next().value)
+        finalData[i]=mapIter.next().value;
+        //finalData.push(mapIter.next().valu)
+      }
+    //  console.log("size of finalData", finalData.length);
+      for(var j=finalData.length-1; j=0;j--){
+        appendString(finalData[j])
       }
       console.log("Final data ::::", go);
   });
