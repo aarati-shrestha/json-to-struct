@@ -9,7 +9,7 @@ $(document).ready(function(){
 
 
 function convertToStruct(){
-  var data ='{"Header": "headerdata", "body":{"body1": "body1data", "body2":"body2data"}, "tail":{"tick": "tock"}}'
+  var data ='{"Header": "headerdata", "body":{"body1": "body1data", "body2": {"la": {"fa":"tuku"}}}, "tail":{"tick": "tock"}}'
   var jsonObject;
   try {
       jsonObject = JSON.parse(data);
@@ -84,6 +84,7 @@ function indent(tabs){
 
   function appendNested(keyName, objectData){
   //
+
     var str = JSON.stringify(objectData);
     console.log("inside appendNested",str);
     var nestedGo ="";
@@ -98,6 +99,9 @@ function indent(tabs){
       datatype = goType(jsonObject[k])
       //indent(tab)
       nestedGo += propertyName+" "+datatype+' `json:"'+k+'"`\n'
+      if( goType(jsonObject[k]) === "struct"){
+        appendNested(firstLetterUppercase(k), jsonObject[k] )
+      }
     }
   //indent(0)
     nestedGo +="}\n"
