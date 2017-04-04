@@ -5,11 +5,8 @@ $(document).ready(function(){
   var keyMap = new Map();
   var tab = 0
 //  var data ='{"Header": "headerdata", "body":{"body1": "body1data", "body2": {"la": {"fa":"tuku"}}}, "tail":{"tick": "tock"}}'
-  //var data ='{"header":[{"h1":"value", "data2": "value"},{"h1":"value","h2":"value"}]}'
-//  var data = '{"header":[{"h1":"h1"},{"h1":"haha","another":"hello","h2":"h2","h3":"ratar"}],"body":{"b1":"value","b2":"value"}}'
-  //var data ='{"header":[{"h1":"h1"},{"h1":"lol","h2":"h2","h3":"ratar"}],"body":{"b1":"value","b2":"value"}}'
-  //var data = '{"header":[{"h1":"h1"},{"h1":"haha","another":[{"hello":"yo"},{"tom":"cat"}],"h2":"h2","h3":"ratar"}],"body":{"b1":"value","b2":"value"}}';
-  var data ='{"header":[{"h1":"h1"},{"h1":"haha","h2":"h2","h3":"ratar","h4":[{"h4.1":"yo"},{"h4.2":[{"h4.2.1":"dog"},{"h4.2.2":"shyam"}]}]}],"body":{"b1":"value","b2":"value"}}'
+var data = '{"Header":{"ImmediateDestination":291270649,"ImmediateOrigin":291270649},"Batches":[{"BatchHeader":{"ServiceClassCode":200,"CompanyName":"MCJKFIS"},"Entries":[{"TransactionCode":22,"CheckDigit":4},{"TransactionCode":22,"RDFIIdentification":33333333}],"BatchControl":{"ServiceClassCode":200,"EntryAddendaCount":3}}],"Control":{"BatchCount":1,"EntryAddendaCount":3}}'
+
   $("#convertData").click(function(){
       convertToStruct("",JSON.parse(data));
       var mapIter = keyMap.values();
@@ -131,6 +128,9 @@ function parseData(keyName,scope){
             console.log("keydata",jsonObject[k]);
             parseData(k, jsonObject[k])
         }else{
+          if(mapData[k] ==="struct"){
+            convertToStruct(k, jsonObject[k])
+          }
           nestedGo += "\t"+firstLetterUppercase(k)+" "+mapData[k]+' `json:"'+k+'"`\n'
         }
 
@@ -144,3 +144,6 @@ function parseData(keyName,scope){
 
 
 //TODO add omitempty in json where it is necessary
+//TODO data display in random order
+//TODO problem when multiple layer nested array json
+//TODO if the key name is same as the another key name which is nested then it creates problem
