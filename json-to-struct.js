@@ -145,5 +145,4 @@ function parseData(keyName,scope){
 
 //TODO add omitempty in json where it is necessary
 //TODO data display in random order
-//TODO problem when multiple layer nested array json
 //TODO if the key name is same as the another key name which is nested then it creates problem
