@@ -23,3 +23,13 @@
  .arrow{
  	    padding: 200px 0;
  }
+ .panel-body {
+ 	overflow-x: hidden;
+ 	overflow-y: scroll;
+ 	height: 421;
+ }
+ .panel-body p{
+ 	white-space: pre;
+ 	 font-family: monospace;
+  display: block;
+ }

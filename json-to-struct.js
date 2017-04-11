@@ -21,7 +21,7 @@ var data = '{"Header":{"ImmediateDestination":291270649,"ImmediateOrigin":291270
         console.log("inside finalData");
         appendString(finalData[j])
       }
-      $( "#showStruct" ).append("<pre>"+go+"</pre>");
+      $( "#showStruct" ).append("<p>"+go+"</p>");
       console.log("Final data ::::", go);
   });
 
