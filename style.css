@@ -24,7 +24,7 @@
  	    padding: 200px 0;
  }
  .panel-body {
- 	overflow-x: hidden;
+ 	overflow-x: scroll;
  	overflow-y: scroll;
  	height: 421;
  }
