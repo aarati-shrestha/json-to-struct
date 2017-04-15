@@ -4,10 +4,16 @@ $(document).ready(function(){
   //KeyMap is used as map instead of array for future use.
   var keyMap = new Map();
   var tab = 0
+
 //  var data ='{"Header": "headerdata", "body":{"body1": "body1data", "body2": {"la": {"fa":"tuku"}}}, "tail":{"tick": "tock"}}'
 var data = '{"Header":{"ImmediateDestination":291270649,"ImmediateOrigin":291270649},"Batches":[{"BatchHeader":{"ServiceClassCode":200,"CompanyName":"MCJKFIS"},"Entries":[{"TransactionCode":22,"CheckDigit":4},{"TransactionCode":22,"RDFIIdentification":33333333}],"BatchControl":{"ServiceClassCode":200,"EntryAddendaCount":3}}],"Control":{"BatchCount":1,"EntryAddendaCount":3}}'
-
+  //var data =""
   $("#convertData").click(function(){
+    go = ""
+    data = $("#jsonContent").text();
+    data = data.replace(/\s+/g, " ");
+    console.log("Data ::::", data);
+    //return;
       convertToStruct("",JSON.parse(data));
       var mapIter = keyMap.values();
       //var mapData = new Map();
@@ -21,6 +27,7 @@ var data = '{"Header":{"ImmediateDestination":291270649,"ImmediateOrigin":291270
         console.log("inside finalData");
         appendString(finalData[j])
       }
+      $("#showStruct").empty()
       $( "#showStruct" ).append("<p>"+go+"</p>");
       console.log("Final data ::::", go);
   });
@@ -83,7 +90,7 @@ function goType(val){
 			case "boolean":
 				return "bool";
 			case "object":
-        console.log("inside object");
+      //  console.log("inside object");
 				if (Array.isArray(val))
 					return "slice";
 				return "struct";
@@ -116,6 +123,11 @@ function parseData(keyName,scope){
       for (var i = 0; i < scopeLength; i++){
         var str = JSON.stringify(scope[i]);
         var jsonObject = JSON.parse(str);
+        //Check if the jsonObject is json or not
+        if(!(typeof jsonObject == 'object')){
+          console.log("type is not json")
+          return;
+        }
 
         console.log("jsonObject in parseData()", jsonObject);
         for(var k in jsonObject){
